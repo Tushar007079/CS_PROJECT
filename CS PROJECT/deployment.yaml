@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tusharmoviesdb-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: tusharmoviesdb
+  template:
+    metadata:
+      labels:
+        app: tusharmoviesdb
+    spec:
+      containers:
+        - name: angular-container
+          image: icr.io/tkmovies/angular
+          ports:
+            - containerPort: 3000  # Port for Angular app
+          resources:
+            requests:
+              memory: "128Mi"   # Lowered memory request
+              cpu: "100m"       # Lowered CPU request
+            limits:
+              memory: "256Mi"   # Lowered memory limit
+              cpu: "250m"       # Lowered CPU limit
